@@ -35,6 +35,7 @@ class Sprocket
 			'debugMode' => false,
 			'autoRender' => false,
 			'contentType' => 'application/x-javascript',
+			'gzip' => true,
 		), $options); 
 		
 		extract($options, EXTR_OVERWRITE);
@@ -44,6 +45,7 @@ class Sprocket
 		$this->setAssetFolder($assetFolder);
 		$this->setDebugMode($debugMode);
 		$this->setContentType($contentType);
+		$this->setGzip($gzip);
 
 		$this->setFilePath($file);
 				
@@ -81,7 +83,13 @@ class Sprocket
 			return $this->_parsedSource;
 		}
 		
-		echo $this->_parsedSource;
+		if (!$this->debugMode && $this->gzip) {
+			header("Content-Encoding: gzip");
+			echo gzencode($this->_parsedSource);
+		} else {
+			echo $this->_parsedSource;
+		}
+		
 	}
 	
 	/**
@@ -235,7 +243,7 @@ class Sprocket
 	 * @return object self
 	 */
 	function setFilePath($filePath) {
-		$this->filePath = str_replace($this->baseUri, '..', $filePath);
+		$this->filePath = $_SERVER['DOCUMENT_ROOT'] . $filePath;
 		$this->fileExt = array_pop(explode('.', $this->filePath));
 		return $this;
 	}
@@ -249,6 +257,18 @@ class Sprocket
 	 */
 	function setDebugMode($enabled = true) {
 		$this->debugMode = $enabled;
+		return $this;		
+	}
+
+	/**
+	 * Enable or Disable the debug mode. 
+	 * Debug mode prevents file caching.
+	 *
+	 * @param boolean $enabled
+	 * @return object self
+	 */
+	function setGzip($enabled = true) {
+		$this->gzip = $enabled;
 		return $this;		
 	}
 	

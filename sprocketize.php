@@ -1,6 +1,13 @@
-<?php require_once('lib/sprocket.php');
+<?php
+require_once('lib/sprocket.php');
 $filePath = preg_replace('/\?.*/', '', $_SERVER['REQUEST_URI']);
-$sprocket = new Sprocket($filePath, array(
-	'baseUri' => '/php-sprockets', 
-	'autoRender' => true
-)); ?>
+$sprocket = new Sprocket($filePath, array());
+switch ($sprocket->fileExt) {
+	case 'css':
+		$sprocket->setContentType('text/css')->setBaseFolder('/css');
+		break;
+	default: case 'js':
+		$sprocket->setBaseFolder('/js');
+		break;
+}
+$sprocket->render();

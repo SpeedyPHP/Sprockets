@@ -110,7 +110,7 @@ class Sprocket
 		$source = file_get_contents($context.'/'.$file);
 				
 		// Parse Commands
-		preg_match_all('/\/\/= ([a-z]+) ([^\n]+)/', $source, $matches);
+		preg_match_all('/\/\/= ([a-z_]+) ([^\n]+)/', $source, $matches);
 		foreach($matches[0] as $key => $match) {
 			$commandRaw = $matches[0][$key];
 			$commandName = $matches[1][$key];

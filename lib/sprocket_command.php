@@ -39,4 +39,25 @@ class SprocketCommand {
 	function getFileContext($context, $param) {
 		return dirname($context.'/'.$param.'.'.$this->Sprocket->fileExt);
 	}
+
+	/**
+	 * Return array of files
+	 */
+	function getFileNamesFromDir($context, $param) {
+		$dh = opendir($context.'/'.$param);
+		$files = array();
+		while (($file = readdir($dh)) !== false) {
+			if ($file !== '.' && $file !== '..') {
+				if (is_dir($context.'/'.$param.'/'.$file)) {
+					$files = array_merge($files, $this->getFileNamesFromDir($context, $param.'/'.$file));
+				} else {
+					$files[] = array(
+						'fileName' => $file,
+						'fileContext' => $param
+					);
+				}
+			}
+		}
+		return $files;
+	}
 }

@@ -36,10 +36,12 @@ class Sprocket
 			'autoRender' => false,
 			'contentType' => 'application/x-javascript',
 			'gzip' => true,
+			'cacheFolder'	=> null
 		), $options); 
 		
 		extract($options, EXTR_OVERWRITE);
 		
+		$this->setCacheFolder($cacheFolder);
 		$this->setBaseUri($baseUri);
 		$this->setBaseFolder($baseFolder);
 		$this->setAssetFolder($assetFolder);
@@ -106,8 +108,7 @@ class Sprocket
 	function parseFile($file, $context) {		
 		if (!is_file(realpath($this->filePath))) 
 			$this->fileNotFound();				
-		
-		$source = file_get_contents($context.'/'.$file);
+		$source = file_get_contents($context . DIRECTORY_SEPARATOR . $file);
 				
 		// Parse Commands
 		preg_match_all('/\/\/= ([a-z_]+) ([^\n]+)/', $source, $matches);
@@ -237,13 +238,28 @@ class Sprocket
 	}
 	
 	/**
+	 * Getter for cacheFolder
+	 * 
+	 * @return string
+	 */
+	public function cacheFolder() {
+		if (!isset($this->_cacheFolder)) dirname($this->filePath);
+		
+		if (!file_exists($this->_cacheFolder)) {
+			mkdir($this->_cacheFolder);
+		}
+		
+		return $this->_cacheFolder;
+	}
+	
+	/**
 	 * Assign the current file to parse. 
 	 *
 	 * @param string $filePath Full Path to the JS file
 	 * @return object self
 	 */
-	function setFilePath($filePath) {
-		$this->filePath = $_SERVER['DOCUMENT_ROOT'] . $filePath;
+	function setFilePath($filePath, $abs = false) {
+		$this->filePath = (!$abs) ? $this->assetFolder . $filePath : $filePath; 
 		$this->fileExt = array_pop(explode('.', $this->filePath));
 		return $this;
 	}
@@ -317,6 +333,17 @@ class Sprocket
 	}
 	
 	/**
+	 * Set cacheFolder
+	 * 
+	 * @param string $cacheFolder
+	 * @return object self
+	 */
+	private function setCacheFolder($cacheFolder) {
+		$this->_cacheFolder	= $cacheFolder;
+		return $this;
+	}
+	
+	/**
 	 * Base URI - Path to webroot
 	 * @var string
 	 */
@@ -385,4 +412,10 @@ class Sprocket
 	 * @access private
 	 */
 	var $_fromCache = false;	
+	
+	/**
+	 * Directory of cache
+	 * @var string
+	 */
+	var $_cacheFolder;
 }

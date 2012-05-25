@@ -5,7 +5,7 @@
  * @package sprocket
  * @subpackage libs
  */
-require_once('sprocket_command.php');
+require_once('SprocketCommand.php');
 
 // CSS Minify 
 define('MINIFY_CSS', 'cssmin-v1.0.1.b3.php');

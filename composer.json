@@ -1,0 +1,11 @@
+{
+	"name" : "SpeedyPHP/Sprockets",
+	"description" : "Sprockets package being used with SpeedyPHP",
+	"keywords" : ["SpeedyPHP", "Sprockets"],	
+	"license": "MIT",
+	"authors": [{
+		"name":"SpeedyPHP Development Team"
+	},{
+		"name":"Zachary Quintana"
+	}]
+}

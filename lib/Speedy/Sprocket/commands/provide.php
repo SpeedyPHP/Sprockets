@@ -2,15 +2,15 @@
 /**
  * PHPSprocket - A PHP implementation of Sprocket
  *
- * @package sprocket
- * @subpackage commands
+ * @package Speedy/Sprocket
+ * @subpackage Commands
  */
+namespace Speedy\Sprocket\Commands;
 
-/**
- * SprocketCommand : Provide Class
- * 
- */
-class SprocketCommandProvide extends SprocketCommand 
+
+use \Speedy\Sprocket\Command;
+
+class SprocketCommandProvide extends Command 
 {
 	/**
 	 * Command Exec

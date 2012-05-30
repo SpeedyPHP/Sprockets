@@ -1,4 +1,4 @@
-h1. PHP Sprocket
+# PHP Sprocket
 
 PHP Sprocket is a port of Sprockets - the ruby library for Javascript dependency management and concatenation. 
 For syntax instructions visit http://getsprockets.org/installation_and_usage.
@@ -16,13 +16,13 @@ Major differences between the original port and this fork are:
 * Selective minification for JS and CSS out of the box. Just add "minify" (see demo files)
 * Fully documented sourcecode
 
-h3. Installation
+### Installation
 
 # I would start with checking the demo. It contains the basics 
 # Copy/Modify the .htaccess and sprocketize.php to your webroot.
 # Modify the 'lib/sprocket.php' require-path to your needs.
 
-h3. Changes to the original sprockets.
+### Changes to the original sprockets.
 
 PHP Sprockets currently acts as a transparent proxy as default and caches results. 
 Because of this you do not have to initialize any classes in your app and sprocket stays separate.
@@ -39,9 +39,9 @@ sprocket files. All it takes is to add a "minify" to the end of the require stat
 Example: @//= require "application" minify@ and the application.js (or .css) is minified
 
 
-h3. Interface
+### Interface
 
-<pre><code>
+```php
 $sprocket = new Sprocket($filePath, array(    
 	'contentType' => 'application/x-javascript',
 	'baseUri' => '/my/site/',
@@ -50,7 +50,7 @@ $sprocket = new Sprocket($filePath, array(
 	'debugMode' => false,
 	'autoRender' => false
 ));
-</code></pre>
+```
 
 If @debugMode@ is enabled then resulting files aren't cached. If @autoRender@ is enabled the file will
 be echoed upon construct. If @contentType@ is false instead of a string the content-type is not sent.
@@ -61,7 +61,7 @@ If you pass @true@ to the render method, @render()@ will not echo the javascript
 You can also ignore the second constructor parameter and use setters. Setters always return the object itself 
 so you can chain the commands: @$sprocket->setDebugMode(true)->setAutoRender(false)->render()@ and so on..
 
-h3. Creating new commands
+### Creating new commands
 
 To create new commands like "require" and "provide" all you need to do is to create a new class in
 the "commands" folder under "lib". For example, we want to create a "flag" command that somehow
@@ -72,14 +72,19 @@ Any command class needs to define a @exec()@ method. This method receives two pa
 can use to do stuff. SprocketCommand also has the Sprocket Object as property by design, so we can
 use the current instance to get more info about the current job.
  
-<pre><code>
+```php
 // flag.php
-class SprocketCommandFlag extends SprocketCommand {
+namespace \Speedy\Sprocket\Commands;
+
+
+use \Speedy\Sprocket\Command;
+
+class Flag extends Command {
     function exec($param, $context) {
         // do something
     }
 }
-</code></pre>
+```
 
 This is all there is to it. We can now perform @//= flag "something"@ in our source files and the
 exec-method is called. In the event that we want to replace the sprocket command (//= ...) with a 
@@ -89,7 +94,7 @@ The exec method doesn't need to return anything. You can just use it to modify t
 if you want to.
 
 
-h3. Credits
+### Credits
 
 All thanks to Stuart for porting sprockets! I just modified it a bit. :)
 Special Thanks to Sam Stephenson for the original idea.
@@ -97,6 +102,6 @@ Special Thanks to Sam Stephenson for the original idea.
 Big up to Joe Scylla for CSSmin and Ryan Grove for JSmin. Their code 
 power the new and fancy "minify" option.
 
-h3. Maintainer
+### Maintainer
 
 Kjell Bublitz - m3nt0r.de (at) gmail.com

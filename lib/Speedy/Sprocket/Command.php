@@ -2,16 +2,13 @@
 /**
  * PHPSprocket - A PHP implementation of Sprocket
  *
- * @package sprocket
- * @subpackage libs
- */
-
-/**
- * SprocketCommand Class
- * 
+ * @package Speedy\Sprocket
  * @author Kjell Bublitz
  */
-class SprocketCommand {
+namespace Speedy\Sprocket;
+
+
+class Command {
 
 	/**
 	 * Sprocket Object

@@ -7,5 +7,10 @@
 		"name":"SpeedyPHP Development Team"
 	},{
 		"name":"Zachary Quintana"
-	}]
+	}],
+	"autoload":{
+		"psr-0": {
+			"Speedy\\Sprocket" : "lib"
+		}
+	}
 }

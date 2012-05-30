@@ -2,15 +2,19 @@
 /**
  * PHPSprocket - A PHP implementation of Sprocket
  *
- * @package sprocket
- * @subpackage libs
+ * @package Speedy/Sprocket
  */
-require_once('SprocketCommand.php');
+namespace Speedy\Sprocket;
+
+
+use \Speedy\Sprocket\Command;
 
 // CSS Minify 
 define('MINIFY_CSS', 'cssmin-v1.0.1.b3.php');
 // JS Minify
 define('MINIFY_JS', 'jsmin-1.1.1.php');
+
+const DS = DIRECTORY_SEPARATOR;
 
 /**
  * Sprocket Class
@@ -127,7 +131,7 @@ class Sprocket
 		}
 		
 		// Parse Constants
-		$constFile = $context.'/'.str_replace(basename($file), '', $file). 'constants.ini';
+		$constFile = $context . DS . str_replace(basename($file), '', $file) . 'constants.ini';
 		if (is_file($constFile)) {
 			if(!isset($this->_constantsScanned[$constFile])) {
 				$this->parseConstants($constFile);
@@ -184,7 +188,18 @@ class Sprocket
 	 * @return boolean
 	 */
 	function commandExists($command) {
-		return is_file(dirname(__FILE__).'/commands/'.$command.'.php');
+		return is_file(dirname(__FILE__). DS . 'Commands' . DS . $this->toClass($command) . '.php');
+	}
+	
+	function toClass($command) {
+		if (strpos($command, '_') === false) return $command;
+		
+		$commandArr	= explode('_', $command);
+		array_walk($commandArr, function(&$val, $key) {
+			$val	= ucfirst($val);
+		});
+		
+		return implode('', $commandArr);
 	}
 	
 	/**
@@ -194,8 +209,8 @@ class Sprocket
 	 * @return object
 	 */
 	function requireCommand($command) {
-		require_once(dirname(__FILE__).'/commands/'.$command.'.php');
-		$commandClass = 'SprocketCommand'.ucfirst($command);
+		require_once(dirname(__FILE__) . DS . 'Commands' . DS . $this->toClass(command) . '.php');
+		$commandClass = '\\Speedy\\Sprocket\\Commands\\'.$this->toClass($command);
 		$commandObject = new $commandClass($this);
 		return $commandObject;
 	}

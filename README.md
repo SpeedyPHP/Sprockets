@@ -18,9 +18,9 @@ Major differences between the original port and this fork are:
 
 ### Installation
 
-# I would start with checking the demo. It contains the basics 
-# Copy/Modify the .htaccess and sprocketize.php to your webroot.
-# Modify the 'lib/sprocket.php' require-path to your needs.
+1. I would start with checking the demo. It contains the basics 
+2. Copy/Modify the .htaccess and sprocketize.php to your webroot.
+3. Modify the 'lib/sprocket.php' require-path to your needs.
 
 ### Changes to the original sprockets.
 

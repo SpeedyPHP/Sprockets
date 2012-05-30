@@ -3,7 +3,7 @@
 PHP Sprocket is a port of Sprockets - the ruby library for Javascript dependency management and concatenation. 
 For syntax instructions visit http://getsprockets.org/installation_and_usage.
 
-This fork is a rewrite of the the original PHPSprockets by Stuart Loxton.
+This fork is a rewrite of the the original PHPSprockets by Kjell Bublitz.
  
 Major differences between the original port and this fork are:
 
@@ -27,7 +27,7 @@ Major differences between the original port and this fork are:
 PHP Sprockets currently acts as a transparent proxy as default and caches results. 
 Because of this you do not have to initialize any classes in your app and sprocket stays separate.
 
-For constants you can use either @<%=@ or @<?=@ this is to make the syntax closer to PHPs but still 
+For constants you can use either `<%=` or `<?=` this is to make the syntax closer to PHPs but still 
 keep compatibility with original sprocket files.
 
 **NEW:** This fork of sprockets tends to be quiet different. Although it is generally the same, the feature 
@@ -36,7 +36,7 @@ now can deal with CSS if you like.
 
 **NEW:** Powered by CSSmin and JSmin you can now minify your sourcecode while you require it in your 
 sprocket files. All it takes is to add a "minify" to the end of the require statement. 
-Example: @//= require "application" minify@ and the application.js (or .css) is minified
+Example: `//= require "application" minify` and the application.js (or .css) is minified
 
 
 ### Interface
@@ -52,14 +52,14 @@ $sprocket = new Sprocket($filePath, array(
 ));
 ```
 
-If @debugMode@ is enabled then resulting files aren't cached. If @autoRender@ is enabled the file will
-be echoed upon construct. If @contentType@ is false instead of a string the content-type is not sent.
+If `debugMode` is enabled then resulting files aren't cached. If `autoRender` is enabled the file will
+be echoed upon construct. If `contentType` is false instead of a string the content-type is not sent.
 
-If you disabled autoRender (default) then you need to call the @render()@ after creating the instance.
-If you pass @true@ to the render method, @render()@ will not echo the javascript and return it as string instead.
+If you disabled autoRender (default) then you need to call the `render()` after creating the instance.
+If you pass `true` to the render method, `render()` will not echo the javascript and return it as string instead.
 
 You can also ignore the second constructor parameter and use setters. Setters always return the object itself 
-so you can chain the commands: @$sprocket->setDebugMode(true)->setAutoRender(false)->render()@ and so on..
+so you can chain the commands: `$sprocket->setDebugMode(true)->setAutoRender(false)->render()` and so on..
 
 ### Creating new commands
 
@@ -68,7 +68,7 @@ the "commands" folder under "lib". For example, we want to create a "flag" comma
 modifies the output, like Stuart proposed. 
 
 To add this we need to create a class called "SprocketCommandFlag" which extends "SprocketCommand".
-Any command class needs to define a @exec()@ method. This method receives two parameters which we
+Any command class needs to define a `exec()` method. This method receives two parameters which we
 can use to do stuff. SprocketCommand also has the Sprocket Object as property by design, so we can
 use the current instance to get more info about the current job.
  
@@ -86,7 +86,7 @@ class Flag extends Command {
 }
 ```
 
-This is all there is to it. We can now perform @//= flag "something"@ in our source files and the
+This is all there is to it. We can now perform `//= flag "something"` in our source files and the
 exec-method is called. In the event that we want to replace the sprocket command (//= ...) with a 
 return value from the exec method (formatter, maybe..), the return value needs to be a string.
 
@@ -102,6 +102,8 @@ Special Thanks to Sam Stephenson for the original idea.
 Big up to Joe Scylla for CSSmin and Ryan Grove for JSmin. Their code 
 power the new and fancy "minify" option.
 
+Thanks goes to Kjell for taking the original library and making it object orientated.
+
 ### Maintainer
 
-Kjell Bublitz - m3nt0r.de (at) gmail.com
+Zachary Quintana - zach.quintana (at) gmail.com

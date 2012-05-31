@@ -1,5 +1,6 @@
 <?php
-require_once('lib/sprocket.php');
+use \Speedy\Sprocket\Sprocket;
+
 $filePath = preg_replace('/\?.*/', '', $_SERVER['REQUEST_URI']);
 $sprocket = new Sprocket($filePath, array());
 switch ($sprocket->fileExt) {

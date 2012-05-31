@@ -1,4 +1,6 @@
 <?php 
+require_once "loader.php";
+
 defined("STDOUT") or define("STDOUT", fopen("php://stdout", "w"));
 
 function debug($str = "") {

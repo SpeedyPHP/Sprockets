@@ -72,7 +72,7 @@ class Sprocket
 		
 		if (!$this->_fromCache) {	
 			$file = basename($this->filePath);
-			$context = dirname($this->filePath);
+			$context = dirname($this->filePath); debug("FILE: $context|$file");
 			
 			$this->_parsedSource = $this->parseFile($file, $context);
 		}
@@ -188,11 +188,12 @@ class Sprocket
 	 * @return boolean
 	 */
 	function commandExists($command) {
+		if ($command == 'require') $command = 'CRequire';
 		return is_file(dirname(__FILE__). DS . 'Commands' . DS . $this->toClass($command) . '.php');
 	}
 	
 	function toClass($command) {
-		if (strpos($command, '_') === false) return $command;
+		if (strpos($command, '_') === false) return ucfirst($command);
 		
 		$commandArr	= explode('_', $command);
 		array_walk($commandArr, function(&$val, $key) {
@@ -209,7 +210,9 @@ class Sprocket
 	 * @return object
 	 */
 	function requireCommand($command) {
-		require_once(dirname(__FILE__) . DS . 'Commands' . DS . $this->toClass(command) . '.php');
+		debug("COMMAND: $command");
+		if ($command == 'require') $command = 'CRequire'; // Stupid fix for limitations of php5 class names 
+		
 		$commandClass = '\\Speedy\\Sprocket\\Commands\\'.$this->toClass($command);
 		$commandObject = new $commandClass($this);
 		return $commandObject;

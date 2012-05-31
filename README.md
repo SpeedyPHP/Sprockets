@@ -42,6 +42,8 @@ Example: `//= require "application" minify` and the application.js (or .css) is 
 ### Interface
 
 ```php
+use \Speedy\Sprocket\Sprocket;
+
 $sprocket = new Sprocket($filePath, array(    
 	'contentType' => 'application/x-javascript',
 	'baseUri' => '/my/site/',

@@ -10,7 +10,7 @@ namespace Speedy\Sprocket\Commands;
 
 use \Speedy\Sprocket\Command;
 
-class SprocketCommandRequire extends Command 
+class CRequire extends Command 
 {	
 	/**
 	 * Command Exec
@@ -64,16 +64,16 @@ class SprocketCommandRequire extends Command
 	{
 		if ($this->Sprocket->fileExt == 'css') {
 			if (!class_exists('cssmin')) {
-				require_once(realpath(dirname(__FILE__).'/../third-party/'.MINIFY_CSS));
+				require_once(realpath(dirname(__FILE__).'/../../../../third-party/'.MINIFY_CSS));
 			}
-			$source = cssmin::minify($source, "preserve-urls");	
+			$source = \cssmin::minify($source, "preserve-urls");	
 		}
 		
 		if ($this->Sprocket->fileExt == 'js') {
 			if (!class_exists('JSMin')) {
-				require_once(realpath(dirname(__FILE__).'/../third-party/'.MINIFY_JS));
+				require_once(realpath(dirname(__FILE__).'/../../../../third-party/'.MINIFY_JS));
 			}
-			$source = JSMin::minify($source);	
+			$source = \JSMin::minify($source);	
 		}
 
 		return $source;

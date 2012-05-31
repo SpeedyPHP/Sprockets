@@ -1,13 +1,16 @@
 <?php 
-require_once('../lib/sprocket.php');
+require_once "loader.php";
+
+use \Speedy\Sprocket\Sprocket;
 
 // get path from request
 $filePath = preg_replace('#\?.*#', '', $_SERVER['REQUEST_URI']);
 
 // prepare sprocket
 $sprocket = new Sprocket($filePath, array(
-	'baseUri' => '/php-sprockets', 
-	'debugMode' => true
+	'baseUri'	=> '/php-sprockets', 
+	'debugMode' => true,
+	'assetFolder'	=> __DIR__
 ));
 
 // change base folder based on extension

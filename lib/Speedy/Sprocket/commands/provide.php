@@ -10,7 +10,7 @@ namespace Speedy\Sprocket\Commands;
 
 use \Speedy\Sprocket\Command;
 
-class SprocketCommandProvide extends Command 
+class Provide extends Command 
 {
 	/**
 	 * Command Exec

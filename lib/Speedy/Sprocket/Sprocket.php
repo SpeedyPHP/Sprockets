@@ -72,7 +72,7 @@ class Sprocket
 		
 		if (!$this->_fromCache) {	
 			$file = basename($this->filePath);
-			$context = dirname($this->filePath); debug("FILE: $context|$file");
+			$context = dirname($this->filePath); 
 			
 			$this->_parsedSource = $this->parseFile($file, $context);
 		}
@@ -210,7 +210,6 @@ class Sprocket
 	 * @return object
 	 */
 	function requireCommand($command) {
-		debug("COMMAND: $command");
 		if ($command == 'require') $command = 'CRequire'; // Stupid fix for limitations of php5 class names 
 		
 		$commandClass = '\\Speedy\\Sprocket\\Commands\\'.$this->toClass($command);

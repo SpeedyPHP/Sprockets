@@ -2,7 +2,6 @@
 	"name"	: "SpeedyPHP/Sprockets",
 	"description"	: "Sprockets package being used with SpeedyPHP",
 	"keywords" 	: ["SpeedyPHP", "Sprockets"],	
-	"version"	: '1.0.0-dev',
 	"license"	: "MIT",
 	"authors"	: [{
 		"name"	: "SpeedyPHP Development Team"

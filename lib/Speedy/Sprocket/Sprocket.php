@@ -276,8 +276,10 @@ class Sprocket
 	 * @return object self
 	 */
 	function setFilePath($filePath, $abs = false) {
-		$this->filePath = (!$abs) ? $this->assetFolder . $filePath : $filePath; 
-		$this->fileExt = array_pop(explode('.', $this->filePath));
+		$this->filePath = (!$abs) ? $this->assetFolder . $filePath : $filePath;
+		 
+		$aPath	= explode('.', $this->filePath);
+		$this->fileExt = array_pop($aPath);
 		return $this;
 	}
 	

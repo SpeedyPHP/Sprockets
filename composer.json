@@ -1,5 +1,5 @@
 {
-	"name"	: "speedy-php/sprockets",
+	"name"	: "SpeedyPHP/Sprockets",
 	"description"	: "Sprockets package being used with SpeedyPHP",
 	"keywords" 	: ["SpeedyPHP", "Sprockets"],	
 	"license"	: "MIT",

@@ -112,7 +112,7 @@ class Sprocket
 	function parseFile($file, $context) {		
 		if (!is_file(realpath($this->filePath))) 
 			$this->fileNotFound();				
-		$source = file_get_contents($context . DIRECTORY_SEPARATOR . $file);
+		$source = @file_get_contents($context . DIRECTORY_SEPARATOR . $file);
 				
 		// Parse Commands
 		preg_match_all('/\/\/= ([a-z_]+) ([^\n]+)/', $source, $matches);
